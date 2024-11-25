@@ -2,25 +2,22 @@
 const express = require('express')
 const path = require('path')
 const app = express()
-const port = 3001
+const port = process.env.PORT || 3001
+const configViewEngine = require('./config/viewEngines')
+
+const webRoutes = require('./routes/web')
+console.log(process.env) //run the .env
 
 //config template engine
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs')
+configViewEngine(app);
 
-//khai bao route
-app.get('/', (req, res) => {
-    res.send('Helloasdasaaaaaaaaaada World!')
-})
+//config static files
+// take the img from static 
 
-app.get('/ejs', (req, res) => {
-    res.render('sample.ejs')
-})
 
-app.get('/test', (req, res) => {
-    res.send('Hellssso World test again!')
-})
 
+//khai bao route o routes
+app.use('/', webRoutes)
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
