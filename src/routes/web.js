@@ -3,7 +3,9 @@ const router = express.Router()
 const {
     getHomePage,
     getTestPage,
-    getSampleEJSFile
+    getSampleEJSFile,
+    getNavBar,
+    postCreateUser
 } = require('../controllers/homeControllers')
 
 //route = route+ handler method
@@ -15,6 +17,10 @@ router.get('/', getHomePage)
 router.get('/ejs', getSampleEJSFile)
 
 router.get('/test', getTestPage)
+
+router.get('/getnavbar', getNavBar)
+
+router.post('/create-user', postCreateUser)
 
 
 module.exports = router
