@@ -16,8 +16,6 @@
 
     <div>
         <h2>list</h2>
-        <%= JSON.stringify(listUser) %>
-
         <table>
             <tr>
                 <th>ID/th>
@@ -27,26 +25,24 @@
                 <th>Action</th>
 
             </tr>
-            <tr>
-                <td>Peter</td>
-                <td>Griffin</td>
-                <td>$100</td>
-            </tr>
-            <tr>
-                <td>Lois</td>
-                <td>Griffin</td>
-                <td>$150</td>
-            </tr>
-            <tr>
-                <td>Joe</td>
-                <td>Swanson</td>
-                <td>$300</td>
-            </tr>
-            <tr>
-                <td>Cleveland</td>
-                <td>Brown</td>
-                <td>$250</td>
-            </tr>
+
+
+            <ul class="timeline">
+                <% for (var i = 0; i < listUser.length; i++) { %>
+                <tr>
+                    <td><%= listUser[i].id %></td>
+                    <td><%= listUser[i].name %></td>
+                    <td><%= listUser[i].email %></td>
+                    <td><%= listUser[i].city %></td>
+                    <td>
+                        <a href="/update/<%= listUser[i].id %> ">Update</a>
+                        <button>Edit</button>
+                    </td>
+
+                </tr>
+                <% } %>
+            </ul>
+
         </table>
     </div>
 
