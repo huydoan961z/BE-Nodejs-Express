@@ -1,18 +1,14 @@
 const connection = require('../config/database')
+const {
+    getAllUsers
+} = require('../services/CRUDservices')
 
-
-const getHomePage = (req, res) => {
-    res.send('Helloasdasaaaaaaaaaada World!')
-
-    var user = [];
-    connection.query(
-        'SELECT * FROM Users u ',
-        function (err, results, fields) {
-            console.log(results); // results contains rows returned by server
-            user = results;
-            console.log('user', JSON.stringify(user));
-        }
-    )
+const getHomePage = async (req, res) => {
+    let results = await getAllUsers();
+    console.log(results)
+    res.render('home.ejs', {
+        listUser: results
+    })
 
 }
 const getTestPage = (req, res) => {
@@ -23,12 +19,70 @@ const getSampleEJSFile = (req, res) => {
     res.render('sample.ejs')
 }
 const getNavBar = (req, res) => {
+
     res.render('home.ejs')
 }
 
-const postCreateUser = (req, res) => {
-    res.send('aaaaaaa')
+const getCreatePage = (req, res) => {
+    res.render('create.ejs')
 }
+
+const postCreateUser = async (req, res) => {
+    let email = req.body.email;
+    let fname = req.body.fname;
+    let city = req.body.city;
+    console.log("Ten:", fname, "Email:", email, "City:", city);
+
+    // add to database 
+    // connection.query(
+    //     `INSERT INTO Users (email, name, city) VALUES (?, ?, ?)`,
+    //     [email, fname, city],
+    //     function (err, results) {
+    //         if (err) {
+    //             console.error('Error inserting user:', err);
+    //             res.status(500).send('Error creating user');
+    //             return;
+    //         }
+    //         console.log('User created successfully:', results);
+    //         res.send('User created successfully');
+    //     }
+    // );
+
+    try {
+        // add to database 
+        let [results, fields] = await connection.query(
+            `INSERT INTO Users (email, name, city) VALUES (?, ?, ?)`,
+            [email, fname, city]
+        );
+        console.log('User created successfully:', results);
+        res.send('User created successfully');
+    } catch (err) {
+        console.error('Error inserting user:', err);
+        res.status(500).send('Error creating user');
+    }
+};
+
+const postListUser = (req, res) => {
+    let email = req.body.email;
+    let fname = req.body.fname;
+    let city = req.body.city;
+    console.log("Ten:", fname, "Email:", email, "City:", city);
+
+    // add to database 
+    connection.query(
+        `SELECT * FROM Users U`,
+        [email, fname, city],
+        function (err, results) {
+            if (err) {
+                console.error('Error inserting user:', err);
+                res.status(500).send('Error creating user');
+                return;
+            }
+            console.log('User created successfully:', results);
+            res.send('User created successfully');
+        }
+    );
+};
 
 
 module.exports = {
@@ -36,5 +90,6 @@ module.exports = {
     getTestPage,
     getSampleEJSFile,
     getNavBar,
-    postCreateUser
+    postCreateUser,
+    getCreatePage
 }

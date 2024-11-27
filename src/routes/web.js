@@ -5,7 +5,8 @@ const {
     getTestPage,
     getSampleEJSFile,
     getNavBar,
-    postCreateUser
+    postCreateUser,
+    getCreatePage
 } = require('../controllers/homeControllers')
 
 //route = route+ handler method
@@ -21,6 +22,8 @@ router.get('/test', getTestPage)
 router.get('/getnavbar', getNavBar)
 
 router.post('/create-user', postCreateUser)
+
+router.get('/create', getCreatePage)
 
 
 module.exports = router

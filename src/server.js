@@ -14,6 +14,12 @@ console.log(process.env) //run the .env
 //config template engine
 configViewEngine(app);
 
+//config req.body
+app.use(express.json()) //for json
+app.use(express.urlencoded({
+    extended: true
+})) // for data form
+
 //config static files
 // take the img from static 
 
@@ -24,15 +30,15 @@ configViewEngine(app);
 
 
 // A simple SELECT query
-var user = []
-connection.query(
-    'SELECT * FROM Users u ',
-    function (err, results, fields) {
-        console.log(results); // results contains rows returned by server
-        user = results;
-        console.log(JSON.stringify(user))
-    }
-)
+// let user = [];
+// try {
+//     const [results, fields] = await connection.query('SELECT * FROM Users u');
+//     console.log(results); // results contains rows returned by server
+//     user = results;
+//     console.log(JSON.stringify(user));
+// } catch (err) {
+//     console.error('Error executing query:', err);
+// }
 
 
 //khai bao route o routes
