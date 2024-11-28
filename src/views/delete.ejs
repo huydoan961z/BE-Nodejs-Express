@@ -1,0 +1,29 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete user</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body style="margin: 0px 0px;">
+    <%= JSON.stringify(userdelete) %>
+    <div class="topnav">
+        <a href="#home">Home</a>
+        <a class="active" href="/create">Create user</a>
+        <a class="active" href="#home">Edit user</a>
+    </div>
+
+    <div class="form-add-new">
+        <form action="/delete-user/<%= userdelete.id %>" method="post">
+            <fieldset>
+                <legend>Delete existing user:</legend>
+                <input readonly type="email" id="email" name="email" value="<%= userdelete.email %>"><br><br>
+                <input type="submit" value="Delete">
+            </fieldset>
+        </form>
+    </div>
+</body>
+
+</html>

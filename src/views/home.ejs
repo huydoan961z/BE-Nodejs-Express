@@ -36,7 +36,9 @@
                     <td><%= listUser[i].city %></td>
                     <td>
                         <a href="/update/<%= listUser[i].id %> ">Update</a>
-                        <button>Edit</button>
+                        <form action="/delete/<%= listUser[i].id %>" method="get" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
                     </td>
 
                 </tr>

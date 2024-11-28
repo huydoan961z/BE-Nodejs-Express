@@ -8,7 +8,9 @@ const {
     postCreateUser,
     getCreatePage,
     getUpdatePage,
-    postUpdateUser
+    postUpdateUser,
+    getDeletePage,
+    postDeletePage
 } = require('../controllers/homeControllers')
 
 //route = route+ handler method
@@ -31,6 +33,8 @@ router.post('/update-user/:id', postUpdateUser)
 
 router.get('/update/:id', getUpdatePage) // dinh nghia la id nen ben homecontroller no ten id 
 
+router.get('/delete/:id', getDeletePage)
+router.post('delete-user/:id', postDeletePage)
 
 
 module.exports = router

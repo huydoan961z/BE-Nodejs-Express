@@ -1,7 +1,8 @@
 const connection = require('../config/database')
 const {
     getAllUsers,
-    getUserById
+    getUserById,
+    deleteUserById
 } = require('../services/CRUDservices')
 
 const getHomePage = async (req, res) => {
@@ -74,28 +75,19 @@ const postUpdateUser = async (req, res) => {
         res.status(500).send('Error updating user');
     }
 }
-const postListUser = (req, res) => {
-    let email = req.body.email;
-    let fname = req.body.fname;
-    let city = req.body.city;
-    console.log("Ten:", fname, "Email:", email, "City:", city);
+const getDeletePage = async (req, res) => {
+    const userid = req.params.id
+    const user = await getUserById(userid)
+    res.render('delete.ejs', {
+        userdelete: user[0]
+    })
+}
+const postDeletePage = async (req, res) => {
+    let id = req.params.id;
+    const results = await deleteUserById(id)
+    res.redirect('/')
 
-    // add to database 
-    connection.query(
-        `SELECT * FROM Users U`,
-        [email, fname, city],
-        function (err, results) {
-            if (err) {
-                console.error('Error inserting user:', err);
-                res.status(500).send('Error creating user');
-                return;
-            }
-            console.log('User created successfully:', results);
-            res.send('User created successfully');
-        }
-    );
-};
-
+}
 
 module.exports = {
     getHomePage,
@@ -105,5 +97,7 @@ module.exports = {
     postCreateUser,
     getCreatePage,
     getUpdatePage,
-    postUpdateUser
+    postUpdateUser,
+    getDeletePage,
+    postDeletePage
 }
