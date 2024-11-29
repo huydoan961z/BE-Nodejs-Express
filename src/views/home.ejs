@@ -18,7 +18,7 @@
         <h2>list</h2>
         <table>
             <tr>
-                <th>ID/th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>City</th>
@@ -30,8 +30,8 @@
             <ul class="timeline">
                 <% for (var i = 0; i < listUser.length; i++) { %>
                 <tr>
-                    <td><%= listUser[i].id %></td>
-                    <td><%= listUser[i].name %></td>
+                    <td><%= listUser[i]._id %></td>
+                    <td><%= listUser[i].names %></td>
                     <td><%= listUser[i].email %></td>
                     <td><%= listUser[i].city %></td>
                     <td>

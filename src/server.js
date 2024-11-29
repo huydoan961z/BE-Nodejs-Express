@@ -6,9 +6,13 @@ const path = require('path')
 const app = express()
 const port = process.env.PORT || 3001
 const configViewEngine = require('./config/viewEngines')
-const mongoose = require('mongoose');
+const Kitten = require('./models/Kittens')
+
 const webRoutes = require('./routes/web')
 const connection = require('./config/database')
+const {
+    name
+} = require('ejs')
 
 console.log(process.env) //run the .env
 
@@ -21,16 +25,12 @@ app.use(express.urlencoded({
     extended: true
 })) // for data form
 
-//create the db to see in mongodb compass
-const kittySchema = new mongoose.Schema({
-    name: String
-});
-
-const Kitten = mongoose.model('Kitten', kittySchema);
-
 const cat = new Kitten({
-    name: 'Silence'
+    name: 'Silence',
+    name: 'Huy doan ',
 });
+
+
 
 cat.save();
 

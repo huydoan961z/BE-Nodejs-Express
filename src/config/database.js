@@ -48,7 +48,7 @@ const connection = async (req, res) => {
         }
         await mongoose.connect(process.env.DB_HOST, option);
         const state = Number(mongoose.connection.readyState);
-        console.log(dbState.find(f => f.value == state).label, "to db");
+        console.log(dbState.find(f => f.value === state).label, "to db");
     } catch (error) {
         handleError(error);
     }

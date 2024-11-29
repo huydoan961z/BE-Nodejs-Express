@@ -1,11 +1,16 @@
 const connection = require('../config/database')
+const Users = require('../models/users')
+
 const {
     getAllUsers,
     getUserById
 } = require('../services/CRUDservices')
+const {
+    name
+} = require('ejs')
 
 const getHomePage = async (req, res) => {
-    let results = await getAllUsers();
+    let results = await Users.find({})
     console.log(results)
     res.render('home.ejs', {
         listUser: results
@@ -30,31 +35,29 @@ const getCreatePage = (req, res) => {
 
 const getUpdatePage = async (req, res) => {
     const userId = req.params.id
-    const user = await getUserById(userId)
+    const user = await Users.findById(userId)
     console.log(user)
 
     res.render('edit.ejs', {
-        useredit: user[0]
+        useredit: user
     })
 }
 
 const postCreateUser = async (req, res) => {
+    //take info when user type and submit
     let email = req.body.email;
     let fname = req.body.fname;
     let city = req.body.city;
-    try {
-        // add to database 
-        let [results, fields] = await connection.query(
-            `INSERT INTO Users (email, name, city) VALUES (?, ?, ?)`,
-            [email, fname, city]
-        );
-        console.log('User created successfully:', results);
-        res.send('User created successfully');
-    } catch (err) {
-        console.error('Error inserting user:', err);
-        res.status(500).send('Error creating user');
-    }
-};
+
+    await Users.create({
+        //the left must be right compare to in module
+        email: email,
+        city: city,
+        names: fname
+    })
+    res.send(' successfull ')
+
+}
 
 const postUpdateUser = async (req, res) => {
     let userId = req.params.id;
@@ -63,11 +66,13 @@ const postUpdateUser = async (req, res) => {
     let city = req.body.city;
     try {
         // Update to database
-        let [results, fields] = await connection.query(
-            `UPDATE Users SET email = ?, name = ?, city = ? WHERE id = ?`,
-            [email, fname, city, userId]
-        );
-        console.log('User updated successfully:', results);
+        let user = await Users.findByIdAndUpdate(userId, {
+            names: fname,
+            email: email,
+            city: city
+        }, {
+            new: true
+        })
         res.redirect('/')
     } catch (err) {
         console.error('Error updating user:', err);
