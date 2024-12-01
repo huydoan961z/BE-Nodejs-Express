@@ -8,7 +8,8 @@ const {
     postCreateUser,
     getCreatePage,
     getUpdatePage,
-    postUpdateUser
+    postUpdateUser,
+    postDeleteUser
 } = require('../controllers/homeControllers')
 
 //route = route+ handler method
@@ -30,6 +31,8 @@ router.get('/create', getCreatePage)
 router.post('/update-user/:id', postUpdateUser)
 
 router.get('/update/:id', getUpdatePage) // dinh nghia la id nen ben homecontroller no ten id 
+
+router.post('/delete-user/:id', postDeleteUser); // Thêm route này
 
 
 

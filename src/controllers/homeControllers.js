@@ -101,6 +101,18 @@ const postListUser = (req, res) => {
     );
 };
 
+const postDeleteUser = async (req, res) => {
+    let userId = req.params.id;
+    try {
+        await Users.findByIdAndDelete(userId);
+        console.log('User deleted successfully');
+        res.redirect('/');
+    } catch (err) {
+        console.error('Error deleting user:', err);
+        res.status(500).send('Error deleting user');
+    }
+};
+
 
 module.exports = {
     getHomePage,
@@ -110,5 +122,6 @@ module.exports = {
     postCreateUser,
     getCreatePage,
     getUpdatePage,
-    postUpdateUser
+    postUpdateUser,
+    postDeleteUser
 }
