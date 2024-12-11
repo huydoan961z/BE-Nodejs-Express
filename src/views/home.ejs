@@ -35,8 +35,10 @@
                     <td><%= listUser[i].email %></td>
                     <td><%= listUser[i].city %></td>
                     <td>
-                        <a href="/update/<%= listUser[i].id %> ">Update</a>
-                        <button>Edit</button>
+                        <a href="/update/<%= listUser[i]._id %> ">Update</a>
+                        <form action="/delete-user/<%= listUser[i]._id %>" method="post" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
                     </td>
 
                 </tr>

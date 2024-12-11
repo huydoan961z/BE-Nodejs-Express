@@ -9,6 +9,7 @@ const configViewEngine = require('./config/viewEngines')
 const Kitten = require('./models/Kittens')
 
 const webRoutes = require('./routes/web')
+const routerAPI = require('./routes/api')
 const connection = require('./config/database')
 const {
     name
@@ -25,6 +26,8 @@ app.use(express.urlencoded({
     extended: true
 })) // for data form
 
+
+app.use('/v1/', routerAPI)
 const cat = new Kitten({
     name: 'Silence',
     name: 'Huy doan ',
