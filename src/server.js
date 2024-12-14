@@ -7,7 +7,7 @@ const app = express()
 const port = process.env.PORT || 3001
 const configViewEngine = require('./config/viewEngines')
 const Kitten = require('./models/Kittens')
-
+const fileUpload = require('express-fileupload')
 const webRoutes = require('./routes/web')
 const routerAPI = require('./routes/api')
 const connection = require('./config/database')
