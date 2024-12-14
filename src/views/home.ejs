@@ -1,53 +1,51 @@
-<html lang="en">
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="/css/home.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Homepage</title>
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
 
-<body style="margin: 0px 0px;">
-    <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="/create">Create user</a>
+    <body style="margin: 0px 0px;">
+        <div class="topnav">
+            <a class="active" href="#home">Home</a>
+            <a href="/create">Create user</a>
 
-    </div>
+        </div>
 
-    <div>
-        <h2>list</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>City</th>
-                <th>Action</th>
-
-            </tr>
-
-
-            <ul class="timeline">
-                <% for (var i = 0; i < listUser.length; i++) { %>
+        <div>
+            <h2>list</h2>
+            <table>
                 <tr>
-                    <td><%= listUser[i]._id %></td>
-                    <td><%= listUser[i].names %></td>
-                    <td><%= listUser[i].email %></td>
-                    <td><%= listUser[i].city %></td>
-                    <td>
-                        <a href="/update/<%= listUser[i]._id %> ">Update</a>
-                        <form action="/delete-user/<%= listUser[i]._id %>" method="post" style="display:inline;">
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>City</th>
+                    <th>Action</th>
 
                 </tr>
-                <% } %>
-            </ul>
 
-        </table>
-    </div>
 
-</body>
+                <ul class="timeline">
+                    <% for (var i = 0; i < listUser.length; i++) { %>
+                    <tr>
+                        <td><%= listUser[i]._id %></td>
+                        <td><%= listUser[i].names %></td>
+                        <td><%= listUser[i].email %></td>
+                        <td><%= listUser[i].city %></td>
+                        <td>
+                            <a href="/update/<%= listUser[i]._id %> ">Update</a>
+                            <form action="/delete-user/<%= listUser[i]._id %>" method="post" style="display:inline;">
+                        </td>
 
-</html>
+                    </tr>
+                    <% } %>
+                </ul>
+
+            </table>
+        </div>
+
+    </body>
+
+    </html>

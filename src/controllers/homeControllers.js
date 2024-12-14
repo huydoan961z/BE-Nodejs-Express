@@ -34,14 +34,22 @@ const getCreatePage = (req, res) => {
 }
 
 const getUpdatePage = async (req, res) => {
-    const userId = req.params.id
-    const user = await Users.findById(userId)
-    console.log(user)
+    const userId = req.params.id; // Thay đổi từ req.params._id sang req.params.id
+    try {
+        const user = await Users.findById(userId);
+        if (user) {
+            res.render('edit.ejs', {
+                useredit: user
+            });
+        } else {
+            res.status(404).send('User not found');
+        }
+    } catch (err) {
+        console.error('Error fetching user:', err);
+        res.status(500).send('Internal server error');
+    }
+};
 
-    res.render('edit.ejs', {
-        useredit: user
-    })
-}
 
 const postCreateUser = async (req, res) => {
     //take info when user type and submit

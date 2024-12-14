@@ -32,8 +32,7 @@ router.get('/create', getCreatePage)
 
 router.post('/update-user/:id', postUpdateUser)
 
-router.get('/update/:_id', getUpdatePage) // dinh nghia la id nen ben homecontroller no ten id 
-
+router.get('/update/:id', getUpdatePage);
 router.post('/delete-user/:id', postDeleteUser); // Thêm route này
 
 

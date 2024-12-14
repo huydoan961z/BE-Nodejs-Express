@@ -75,12 +75,20 @@ const deleteUserAPI = async (req, res) => {
     }
 };
 
-
+const postUploadSingleFile = (req, res) => {
+    console.log("req", req.files)
+    if (!req.files || Object.keys(req.files).length === 0) {
+        res.status(400).send('No files were uploaded.');
+        return;
+    }
+    return res.send("oke file")
+}
 
 
 module.exports = {
     getUserAPI,
     postUserAPI,
     putUpdateUser,
-    deleteUserAPI
+    deleteUserAPI,
+    postUploadSingleFile
 }
