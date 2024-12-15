@@ -1,6 +1,8 @@
 const connection = require('../config/database')
 const Users = require('../models/users')
-
+const {
+    uploadSingleFile
+} = require('../services/fileService'); // Đảm bảo đường dẫn đúng
 
 const {
     name
@@ -75,14 +77,34 @@ const deleteUserAPI = async (req, res) => {
     }
 };
 
-const postUploadSingleFile = (req, res) => {
-    console.log("req", req.files)
-    if (!req.files || Object.keys(req.files).length === 0) {
-        res.status(400).send('No files were uploaded.');
-        return;
+const postUploadSingleFile = async (req, res) => {
+    console.log("req", req.files);
+
+    if (!req.files || !req.files.image) {
+        return res.status(400).send("No files were uploaded.");
     }
-    return res.send("oke file")
-}
+
+    try {
+        const result = await uploadSingleFile(req.files.image);
+
+        if (result.status === "success") {
+            return res.status(200).json({
+                message: "File uploaded successfully",
+                path: result.path
+            });
+        } else {
+            return res.status(500).json({
+                message: "File upload failed"
+            });
+        }
+    } catch (err) {
+        console.error('Upload error:', err);
+        return res.status(500).json({
+            message: "File upload failed",
+            error: err.message
+        });
+    }
+};
 
 
 module.exports = {

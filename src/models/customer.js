@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 //create the db to see in mongodb compass
 //shape of database
 const customerSchema = new mongoose.Schema({
-    names: {
+    name: {
         require: true,
         type: String
     },
@@ -17,6 +17,6 @@ const customerSchema = new mongoose.Schema({
 });
 
 //model as the ban sao of schema to change , 
-const Customer = mongoose.model('Users', customerSchema);
+const Customer = mongoose.model('Customer', customerSchema);
 
 module.exports = Customer;

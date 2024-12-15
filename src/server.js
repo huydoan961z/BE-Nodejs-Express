@@ -77,14 +77,16 @@ connectToDatabase().then(() => {
 // Config template engine
 configViewEngine(app);
 
+// Config file upload
+app.use(fileUpload());
+
 // Config req.body
 app.use(express.json()); // For JSON
 app.use(express.urlencoded({
     extended: true
 })); // For form data
 
-// Config file upload
-app.use(fileUpload());
+
 
 // Use API routes
 app.use('/v1/', routerAPI);
