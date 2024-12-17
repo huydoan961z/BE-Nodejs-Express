@@ -19,6 +19,31 @@ const createCustomerService = async (customerData) => {
     }
 
 }
+const createMultiCustomerService = async (arr) => {
+    try {
+        let result = Customer.insertMany(arr);
+        return result;
+    } catch (error) {
+        console.log("loi", error)
+    }
+
+}
+
+const postGetAllCustomerService = async (limit, page) => {
+    let result = null
+    if (limit && page) {
+        let skip = (page - 1) * limit
+        result = Customer.find({}).skip(skip).limit(limit).exec();
+    } else {
+        result = Customer.find({})
+    }
+    return result
+
+
+
+}
 module.exports = {
-    createCustomerService
+    createCustomerService,
+    createMultiCustomerService,
+    postGetAllCustomerService
 }
