@@ -70,10 +70,13 @@ module.exports = {
         console.log(req.query)
         let limit = req.query.limit
         let page = req.query.page
+        let name = req.query.name
+        let email = req.query.email
         let result = null
 
-        if (limit && page) {
-            result = await postGetAllCustomerService(limit, page)
+
+        if (limit && page && name && email) {
+            result = await postGetAllCustomerService(limit, page, name, email)
             return res.status(200).json({
                 EC: 0,
                 data: result

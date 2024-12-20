@@ -16,6 +16,10 @@ const {
     deleteCustomer,
     deleteArrayCustomer
 } = require('../controllers/customerController')
+
+const {
+    postCreateProject,
+} = require('../controllers/projectController')
 routerAPI.get('/demo', (req, res) => {
     res.status(200).json({
         data: 'thu'
@@ -37,6 +41,10 @@ routerAPI.get('/customer', postGetAllCustomer)
 routerAPI.put('/customer', putUpdateCustomer)
 routerAPI.delete('/customer', deleteCustomer)
 routerAPI.delete('/customer-many', deleteArrayCustomer)
+
+
+// project
+routerAPI.post('/project', postCreateProject)
 
 
 // for query string

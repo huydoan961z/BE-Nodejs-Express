@@ -29,11 +29,16 @@ const createMultiCustomerService = async (arr) => {
 
 }
 
-const postGetAllCustomerService = async (limit, page) => {
+const postGetAllCustomerService = async (limit, page, name, email) => {
     let result = null
     if (limit && page) {
         let skip = (page - 1) * limit
-        result = Customer.find({}).skip(skip).limit(limit).exec();
+        let condition = name;
+        let condition2 = email
+        result = Customer.find({
+            name: condition,
+            email: condition2
+        }).skip(skip).limit(limit).exec();
     } else {
         result = Customer.find({})
     }
