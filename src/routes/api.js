@@ -19,6 +19,7 @@ const {
 
 const {
     postCreateProject,
+    getAllProject
 } = require('../controllers/projectController')
 routerAPI.get('/demo', (req, res) => {
     res.status(200).json({
@@ -46,7 +47,7 @@ routerAPI.delete('/customer-many', deleteArrayCustomer)
 // project
 routerAPI.post('/project', postCreateProject)
 
-
+routerAPI.get('/project', getAllProject)
 // for query string
 routerAPI.get('/get', (req, res) => {
     console.log(req.query)

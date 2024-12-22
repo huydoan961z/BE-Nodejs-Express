@@ -82,6 +82,7 @@ module.exports = {
                 data: result
             })
         } else {
+
             result = await postGetAllCustomerService()
             return res.status(200).json({
                 EC: 0,

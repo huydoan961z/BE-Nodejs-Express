@@ -33,7 +33,29 @@ const createProjectService = async (projectData) => {
 
 }
 
+const getAllProjectService = (limit, page) => {
+    console.log(limit)
+    console.log(page)
+
+    let skip = (page - 1) * limit
+    let result = Project.find({}).skip(skip).limit(limit).exec();
+
+    return result
+
+
+}
+const getAllProjectServiceWithOutPagin = () => {
+
+    let result = Project.find({})
+
+    return result
+
+
+}
+
 module.exports = {
     createProjectService,
+    getAllProjectService,
+    getAllProjectServiceWithOutPagin
 
 }
