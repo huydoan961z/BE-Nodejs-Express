@@ -2,7 +2,10 @@ const Project = require('../models/project')
 const {
     createProjectService,
     getAllProjectService,
-    getAllProjectServiceWithOutPagin
+    getAllProjectServiceWithOutPagin,
+    deleteProjectService,
+    updateProjectService,
+    removeArrSubService
 } = require('../services/projectService')
 module.exports = {
     postCreateProject: async (req, res) => {
@@ -33,7 +36,38 @@ module.exports = {
 
             })
         }
+    },
 
+    deleteProject: async (req, res) => {
+        let projectID = req.body.id
+        console.log(projectID)
+        let result = await deleteProjectService(projectID)
+        return res.status(200).json({
+            EC: 0,
+            data: result
+        })
+    },
+
+    updateProject: async (req, res) => {
+        let updateInfo = req.body
+        let id = req.body.id
+        console.log(id)
+        let result = await updateProjectService(id, updateInfo)
+        return res.status(200).json({
+            EC: 0,
+            data: result
+        })
+    },
+    removeArrSubController: async (req, res) => {
+        let removeProjectID = req.body.id
+        console.log(removeProjectID)
+        let result = await removeArrSubService(removeProjectID)
+        return res.status(200).json({
+            EC: 0,
+            data: result
+        })
+    },
+    removeSingleSubController: async (req, res) => {
 
     }
 }

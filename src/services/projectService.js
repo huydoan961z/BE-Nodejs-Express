@@ -53,9 +53,40 @@ const getAllProjectServiceWithOutPagin = () => {
 
 }
 
+const deleteProjectService = async (id) => {
+    let result = await Project.delete({
+        _id: id
+    })
+
+    return result
+}
+
+const updateProjectService = async (id, updateInfo) => {
+
+    let result = await Project.findByIdAndUpdate(id, updateInfo, {
+        new: true
+    });
+    return result
+}
+
+const removeArrSubService = async (removeProjectID) => {
+    let findProject = Project.findById({
+        _id: removeProjectID
+    })
+    for (let i = 0; i < findProject.usersInfor.length; i++) {
+        let userremove = findProject.usersInfor[i]
+        findProject.usersInfor.pull(userremove)
+
+    }
+    return findProject
+}
+
 module.exports = {
     createProjectService,
     getAllProjectService,
-    getAllProjectServiceWithOutPagin
+    getAllProjectServiceWithOutPagin,
+    deleteProjectService,
+    updateProjectService,
+    removeArrSubService
 
 }

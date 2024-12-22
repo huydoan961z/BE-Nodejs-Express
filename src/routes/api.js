@@ -19,7 +19,11 @@ const {
 
 const {
     postCreateProject,
-    getAllProject
+    getAllProject,
+    deleteProject,
+    updateProject,
+    removeArrSubController,
+    removeSingleSubController
 } = require('../controllers/projectController')
 routerAPI.get('/demo', (req, res) => {
     res.status(200).json({
@@ -43,11 +47,16 @@ routerAPI.put('/customer', putUpdateCustomer)
 routerAPI.delete('/customer', deleteCustomer)
 routerAPI.delete('/customer-many', deleteArrayCustomer)
 
-
 // project
 routerAPI.post('/project', postCreateProject)
 
 routerAPI.get('/project', getAllProject)
+routerAPI.delete('/project', deleteProject)
+routerAPI.put('/project/s', removeArrSubController)
+routerAPI.put('/project/ss', removeSingleSubController)
+
+
+routerAPI.put('/project', updateProject)
 // for query string
 routerAPI.get('/get', (req, res) => {
     console.log(req.query)
