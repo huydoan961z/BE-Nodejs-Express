@@ -30,6 +30,31 @@ const createProjectService = async (projectData) => {
         }
 
     }
+    if (projectData.type === "Add-task") {
+        try {
+            let findProjec = await Project.findById(projectData.projectId)
+            console.log(findProjec)
+
+            for (let i = 0; i < projectData.taskArray.length; i++) {
+                let useradd = projectData.taskArray[i]
+                if (!findProjec.tasks.some(x => x._id.toString() === useradd.toString())) {
+                    findProjec.tasks.push(useradd)
+
+                }
+
+
+            }
+            let finalProject = await findProjec.save()
+            finalProject = await Project.findById(finalProject._id).populate("tasks")
+            console.log("List info", finalProject.tasks)
+
+            return finalProject
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
 
 }
 

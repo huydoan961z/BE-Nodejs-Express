@@ -22,7 +22,9 @@ const deleteTaskService = async (deleteTaskId) => {
 
 }
 const updateTaskService = async (updateTaskId, updateTask) => {
-    let result = await Task.findByIdAndUpdate(updateTaskId, updateTask)
+    let result = await Task.findByIdAndUpdate(updateTaskId, {
+        ...updateTask
+    })
     return result
 
 }
