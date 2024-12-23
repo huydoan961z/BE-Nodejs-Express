@@ -5,7 +5,8 @@ const {
     getAllProjectServiceWithOutPagin,
     deleteProjectService,
     updateProjectService,
-    removeArrSubService
+    removeArrSubService,
+    removeAllUsersService
 } = require('../services/projectService')
 module.exports = {
     postCreateProject: async (req, res) => {
@@ -59,13 +60,28 @@ module.exports = {
         })
     },
     removeArrSubController: async (req, res) => {
-        let removeProjectID = req.body.id
+        let removeProjectID = req.body.id;
+        let userIdsToRemove = req.body.userIdid; // Array of user IDs to remove
         console.log(removeProjectID)
-        let result = await removeArrSubService(removeProjectID)
-        return res.status(200).json({
-            EC: 0,
-            data: result
-        })
+        console.log(userIdsToRemove)
+        try {
+            let result;
+            if (userIdsToRemove) {
+                result = await removeArrSubService(removeProjectID, userIdsToRemove);
+            } else {
+
+                result = await removeAllUsersService(removeProjectID);
+            }
+            return res.status(200).json({
+                EC: 0,
+                data: result
+            });
+        } catch (error) {
+            return res.status(500).json({
+                EC: 1,
+                message: error.message
+            });
+        }
     },
     removeSingleSubController: async (req, res) => {
 

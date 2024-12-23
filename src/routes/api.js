@@ -25,6 +25,14 @@ const {
     removeArrSubController,
     removeSingleSubController
 } = require('../controllers/projectController')
+
+const {
+    postCreateTask,
+    updateTask,
+    deleteTask,
+    getAllTask
+
+} = require('../controllers/taskController')
 routerAPI.get('/demo', (req, res) => {
     res.status(200).json({
         data: 'thu'
@@ -54,6 +62,15 @@ routerAPI.get('/project', getAllProject)
 routerAPI.delete('/project', deleteProject)
 routerAPI.put('/project/s', removeArrSubController)
 routerAPI.put('/project/ss', removeSingleSubController)
+
+
+// task
+routerAPI.post('/task', postCreateTask)
+routerAPI.put('/task', updateTask)
+routerAPI.delete('/task', deleteTask)
+routerAPI.get('/task', getAllTask)
+
+
 
 
 routerAPI.put('/project', updateProject)

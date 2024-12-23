@@ -69,15 +69,25 @@ const updateProjectService = async (id, updateInfo) => {
     return result
 }
 
-const removeArrSubService = async (removeProjectID) => {
-    let findProject = Project.findById({
-        _id: removeProjectID
-    })
-    for (let i = 0; i < findProject.usersInfor.length; i++) {
-        let userremove = findProject.usersInfor[i]
-        findProject.usersInfor.pull(userremove)
-
+const removeArrSubService = async (removeProjectID, userIdsToRemove) => {
+    let findProject = await Project.findById(removeProjectID);
+    if (!findProject) {
+        throw new Error('Project not found');
     }
+
+    // Remove specific users from the usersInfor array
+    findProject.usersInfor.pull(userIdsToRemove)
+
+    await findProject.save();
+    return findProject;
+};
+const removeAllUsersService = async (removeProjectID) => {
+    let findProject = await Project.findById(removeProjectID);
+    if (!findProject) {
+        throw new Error('Project not found');
+    }
+    findProject.usersInfor = [];
+    findProject.save();
     return findProject
 }
 
@@ -87,6 +97,7 @@ module.exports = {
     getAllProjectServiceWithOutPagin,
     deleteProjectService,
     updateProjectService,
-    removeArrSubService
+    removeArrSubService,
+    removeAllUsersService
 
 }
