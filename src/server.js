@@ -63,6 +63,8 @@ const fileUpload = require('express-fileupload');
 const webRoutes = require('./routes/web');
 const routerAPI = require('./routes/api');
 const connectToDatabase = require('./config/database');
+const cors = require('cors'); // Import the cors package
+
 const {
     MongoClient
 } = require('mongodb');
@@ -80,6 +82,10 @@ app.use(express.json()); // For JSON
 app.use(express.urlencoded({
     extended: true
 })); // For form data
+app.use(cors({
+    origin: 'http://localhost:5173' // Replace with your frontend URL
+}));
+
 
 // Use API routes
 app.use('/v1/', routerAPI);
