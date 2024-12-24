@@ -33,6 +33,13 @@ const {
     getAllTask
 
 } = require('../controllers/taskController')
+
+const {
+    postUserReact,
+    getUserReact,
+    updateUserReact,
+    deleteUserReact
+} = require('../controllers/userReactController')
 routerAPI.get('/demo', (req, res) => {
     res.status(200).json({
         data: 'thu'
@@ -70,6 +77,12 @@ routerAPI.put('/task', updateTask)
 routerAPI.delete('/task', deleteTask)
 routerAPI.get('/task', getAllTask)
 
+
+//userreact
+routerAPI.post('/user/react', postUserReact)
+routerAPI.get('/user/react/', getUserReact);
+routerAPI.put('/user/react/', updateUserReact);
+routerAPI.delete('/user/react/', deleteUserReact);
 
 
 
