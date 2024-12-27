@@ -5,8 +5,14 @@ const postUserReactService = async (addInfo) => {
     return result;
 };
 
-const getUserReactService = async () => {
-    let result = await userReact.find({});
+const getUserReactService = async (limit, page) => {
+    let skip = (page - 1) * limit;
+    let result = await userReact.find({}).skip(skip).limit(limit).exec();
+    return result;
+};
+
+const getUserReactServiceWithoutPagin = async () => {
+    let result = await userReact.find({}).exec();
     return result;
 };
 
@@ -28,5 +34,6 @@ module.exports = {
     postUserReactService,
     getUserReactService,
     updateUserReactService,
-    deleteUserReactService
+    deleteUserReactService,
+    getUserReactServiceWithoutPagin
 };
