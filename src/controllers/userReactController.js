@@ -3,7 +3,8 @@ const {
     getUserReactService,
     updateUserReactService,
     deleteUserReactService,
-    getUserReactServiceWithoutPagin
+    getUserReactServiceWithoutPagin,
+
 
 } = require("../services/userReactService.js");
 const userReact = require('../models/userReact.js')
@@ -14,11 +15,23 @@ const postUserReact = async (req, res) => {
     console.log(result.length)
     return res.status(200).json({
         total: data.length,
+
         EC: 0,
         data: result
 
     });
 };
+
+
+const postCreateUserReact = async (req, res) => {
+    let regisInfo = await req.body
+    let result = await postUserReactService(regisInfo)
+    return res.status(200).json({
+        EC: 0,
+        data: result
+
+    });
+}
 
 const getUserReact = async (req, res) => {
     let limit = parseInt(req.query.limit); // Default limit to 5 if not provided
@@ -81,5 +94,6 @@ module.exports = {
     postUserReact,
     getUserReact,
     updateUserReact,
-    deleteUserReact
+    deleteUserReact,
+    postCreateUserReact
 };
