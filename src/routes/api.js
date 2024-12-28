@@ -39,7 +39,8 @@ const {
     getUserReact,
     updateUserReact,
     deleteUserReact,
-    postCreateUserReact
+    postCreateUserReact,
+    loginApi
 } = require('../controllers/userReactController')
 routerAPI.get('/demo', (req, res) => {
     res.status(200).json({
@@ -80,6 +81,8 @@ routerAPI.get('/task', getAllTask)
 
 
 //userreact
+routerAPI.post('/user/react/login', loginApi)
+
 routerAPI.post('/user/react', postUserReact)
 routerAPI.get('/user/react/', getUserReact);
 routerAPI.post('/user/react/register', postCreateUserReact);

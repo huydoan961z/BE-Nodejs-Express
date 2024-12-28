@@ -4,10 +4,24 @@ const {
     updateUserReactService,
     deleteUserReactService,
     getUserReactServiceWithoutPagin,
-
+    loginApiService
 
 } = require("../services/userReactService.js");
 const userReact = require('../models/userReact.js')
+
+const loginApi = async (req, res) => {
+    let email = req.body.email
+    let password = req.body.password
+    try {
+        let result = await loginApiService(email, password)
+        return res.status(200).json({
+            EC: 0,
+            data: result
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 const postUserReact = async (req, res) => {
     let addInfo = await req.body;
@@ -95,5 +109,6 @@ module.exports = {
     getUserReact,
     updateUserReact,
     deleteUserReact,
-    postCreateUserReact
+    postCreateUserReact,
+    loginApi
 };

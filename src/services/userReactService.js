@@ -1,4 +1,20 @@
 const userReact = require('../models/userReact');
+const jwt = require('jsonwebtoken');
+
+const loginApiService = async (email, password) => {
+    const user = await userReact.findOne({
+        email: email
+    })
+    if (!user) {
+        throw new Error("not found")
+    }
+    if (user.password != password) {
+        throw new Error("not correct")
+
+    }
+    return user
+}
+
 
 const postUserReactService = async (addInfo) => {
     let result = await userReact.create(addInfo);
@@ -31,6 +47,7 @@ const deleteUserReactService = async (id) => {
 };
 
 module.exports = {
+    loginApiService,
     postUserReactService,
     getUserReactService,
     updateUserReactService,
